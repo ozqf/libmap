@@ -457,7 +457,7 @@ vertex_tangent get_standard_tangent(const face *face)
     double dra = fabs(dr);
     double dfa = fabs(df);
 
-    vec3 u_axis;
+    vec3 u_axis = {0};
     double v_sign = 0;
 
     if (dua >= dra && dua >= dfa)

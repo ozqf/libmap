@@ -119,7 +119,8 @@ bool map_parser_load(const char *map_file)
     component_idx = 0;
     valve_uvs = false;
 
-    FILE *map = fopen(map_file, "r");
+    FILE *map;
+	errno_t err = fopen_s(&map, map_file, "r");
 
     if (!map)
     {
@@ -148,7 +149,7 @@ bool map_parser_load(const char *map_file)
         }
         else
         {
-            buf[buf_head++] = c;
+            buf[buf_head++] = (char)c;
         }
     }
 
