@@ -1,6 +1,9 @@
 # build.bat
 *.dblite
 
+bin/
+buildwin_lib/
+buildwin_cli/
 build/
 install/
 

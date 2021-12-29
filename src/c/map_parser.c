@@ -103,7 +103,7 @@ void reset_current_entity()
     current_entity.brush_count = 0;
 }
 
-bool map_parser_load(const char *map_file)
+extern LIBMAP_API bool map_parser_load(const char *map_file)
 {
     map_data_reset();
 

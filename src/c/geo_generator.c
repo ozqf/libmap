@@ -506,11 +506,18 @@ vertex_tangent get_valve_tangent(const face *face)
 
 void geo_generator_print_entities()
 {
+    printf("Entity count: %d\n", entity_count);
+    if (entity_geo == NULL)
+    {
+        printf("Abort print - geo generator has not been run!\n");
+        return;
+    }
     for (int e = 0; e < entity_count; ++e)
     {
         entity *entity_inst = &entities[e];
         entity_geometry *entity_geo_inst = &entity_geo[e];
-        printf("Entity %d\n", e);
+        
+        printf("Entity %d brush count %d\n", e, entity_inst->brush_count);
         for (int b = 0; b < entity_inst->brush_count; ++b)
         {
             brush *brush_inst = &entity_inst->brushes[b];
