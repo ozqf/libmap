@@ -21,8 +21,8 @@
 @set linkStr=/link
 @set linkInputA=user32.lib opengl32.lib Gdi32.lib shell32.lib
 
-cl %includeDir% %compilerFlags% %compilerDefines% %outputPath% %compIn1% %compIn2% %linkStr% %linkInputA%
-lib -nologo /out:maplib.lib geo_generator.obj map_data.obj map_parser.obj matrix.obj surface_gatherer.obj vector.obj
+@cl %includeDir% %compilerFlags% %compilerDefines% %outputPath% %compIn1% %compIn2% %linkStr% %linkInputA%
+@lib -nologo /out:maplib.lib geo_generator.obj map_data.obj map_parser.obj matrix.obj surface_gatherer.obj vector.obj
 
 @set compilerFlags=
 @set compilerDefines=

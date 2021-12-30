@@ -201,6 +201,7 @@ void geo_generator_run()
 
 void generate_brush_vertices(int entity_idx, int brush_idx)
 {
+	printf("Generate brush vertices\n");
     entity *ent_inst = &entities[entity_idx];
     brush *brush_inst = &ent_inst->brushes[brush_idx];
 
@@ -257,14 +258,31 @@ void generate_brush_vertices(int entity_idx, int brush_idx)
                         texture_data *texture = map_data_get_texture(face_inst->texture_idx);
 
                         vertex_uv uv;
-                        if (face_inst->is_valve_uv)
-                        {
-                            uv = get_valve_uv(vertex, face_inst, texture->width, texture->height);
-                        }
-                        else
-                        {
-                            uv = get_standard_uv(vertex, face_inst, texture->width, texture->height);
-                        }
+						if (texture == NULL)
+						{
+							printf("!WARNING texture id %d is null\n", face_inst->texture_idx);
+							uv.u = 0;
+							uv.v = 0;
+						}
+						else
+						{
+							if (texture->width == 0 || texture->height == 0)
+							{
+								printf("!WARNING texture id %d size is 0. Using default of 64px\n",
+									face_inst->texture_idx);
+								texture->width = 64;
+								texture->height = 64;
+							}
+
+							if (face_inst->is_valve_uv)
+                        	{
+                        	    uv = get_valve_uv(vertex, face_inst, texture->width, texture->height);
+                        	}
+                        	else
+                        	{
+                        	    uv = get_standard_uv(vertex, face_inst, texture->width, texture->height);
+                        	}
+						}
 
                         vertex_tangent tangent;
                         if (face_inst->is_valve_uv)
@@ -370,7 +388,7 @@ bool vertex_in_hull(face *faces, int face_count, vec3 vertex)
 
 vertex_uv get_standard_uv(vec3 vertex, const face *face, int texture_width, int texture_height)
 {
-    vertex_uv uv_out;
+    vertex_uv uv_out = { 0, 0 };
 
     double du = fabs(vec3_dot(face->plane_normal, UP_VECTOR));
     double dr = fabs(vec3_dot(face->plane_normal, RIGHT_VECTOR));

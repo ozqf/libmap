@@ -22,7 +22,7 @@
 @set linkStr=/link
 @set linkInputA=user32.lib opengl32.lib Gdi32.lib shell32.lib ../buildwin_lib/maplib.lib
 
-cl %includeDir% %compilerFlags% %compilerDefines% %outputPath% %compIn1% %compIn2% %linkStr% %linkInputA%
+@cl %includeDir% %compilerFlags% %compilerDefines% %outputPath% %compIn1% %compIn2% %linkStr% %linkInputA%
 
 @set compilerFlags=
 @set compilerDefines=
