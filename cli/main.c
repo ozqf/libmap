@@ -4,12 +4,25 @@
 #include <map_data.h>
 #include <geo_generator.h>
 
+static void ListTextures()
+{
+	int numTextures = map_data_get_texture_count();
+	printf("--- Textures (%d) ---\n", numTextures);
+	for (int i = 0; i < numTextures; ++i)
+	{
+		texture_data* tex = map_data_get_texture(i);
+		printf("\"%s\" size %d by %d\n",
+			tex->name, tex->width, tex->height);
+	}
+}
+
 static void WriteMesh()
 {
 	int numTextures = map_data_get_texture_count();
 	int totalVertices = 0;
 	int entCount = map_data_get_entity_count();
-	printf("Num Ents %d, Num textures %d\n", entCount, numTextures);
+	printf("Num Ents %d\n", entCount);
+	
 	for (int ei = 0; ei < entCount; ++ei)
 	{
 		entity *ent = &entities[ei];
@@ -71,17 +84,24 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	printf("Input: \"%s\" output \"%s\"...\n", argv[1], argv[2]);
+
+	// 1 - parse map file
 	bool result = map_parser_load(argv[1]);
 	if (!result)
 	{
 		printf("Map load failed!\n");
 		return 1;
 	}
+
+	// 2 - setup textures - required for UV coordinates
+	ListTextures();
 	printf("Generating Geometry...\n");
+	
+	// 3 - generate mesh geometry
 	geo_generator_run();
 	printf("...Done\n");
-	// printf("Map texture count: %d\n", map_data_get_texture_count());
-	// geo_generator_print_entities();
+	
+	// 4 - write output
 	WriteMesh();
 	printf("Done - success\n");
 	return 0;
