@@ -1,8 +1,10 @@
 # build.bat
 *.dblite
 
+.vscode/
 bin/
 buildwin_lib/
+buildwin_converter/
 buildwin_cli/
 build/
 install/

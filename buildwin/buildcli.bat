@@ -20,9 +20,10 @@
 @set compIn2=
 
 @set linkStr=/link
-@set linkInputA=user32.lib opengl32.lib Gdi32.lib shell32.lib ../buildwin_lib/maplib.lib
+@set linkInputA=user32.lib opengl32.lib Gdi32.lib shell32.lib
+@set linkInputB= ../buildwin_lib/maplib.lib ../buildwin_converter/mapconverter.lib
 
-@cl %includeDir% %compilerFlags% %compilerDefines% %outputPath% %compIn1% %compIn2% %linkStr% %linkInputA%
+@cl %includeDir% %compilerFlags% %compilerDefines% %outputPath% %compIn1% %compIn2% %linkStr% %linkInputA% %linkInputB%
 
 @set compilerFlags=
 @set compilerDefines=
@@ -31,6 +32,7 @@
 @set compIn2=
 @set linkStr=
 @set linkInputA=
+@set linkInputB=
 
 @cd..
 @cd buildwin

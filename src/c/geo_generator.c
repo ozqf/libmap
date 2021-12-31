@@ -201,7 +201,7 @@ void geo_generator_run()
 
 void generate_brush_vertices(int entity_idx, int brush_idx)
 {
-	printf("Generate brush vertices\n");
+	// printf("Generate brush vertices\n");
     entity *ent_inst = &entities[entity_idx];
     brush *brush_inst = &ent_inst->brushes[brush_idx];
 
